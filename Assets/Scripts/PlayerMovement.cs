@@ -87,6 +87,16 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+    void OnTriggerEnter2D(Collider2D target)
+    {
+        if (target.tag == "Pie")
+        {
+            
+            
+                target.gameObject.SetActive(false);
+            
+        }
+    }
 
 
 
