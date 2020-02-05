@@ -70,9 +70,16 @@ public class BirdScript : MonoBehaviour
         transform.localScale = tempScale;
 
     }
+    void OnCollisionEnter2D(Collision2D target)
+    {
+        if (target.gameObject.tag == "Player")
+        {
+            target.gameObject.GetComponent<PlayerDamage>().DealDamage();
+        }
+    }
 
 
-   
+
 
 
 
