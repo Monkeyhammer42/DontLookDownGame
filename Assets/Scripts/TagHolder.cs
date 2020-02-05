@@ -5,4 +5,5 @@ using UnityEngine;
 public class TagHolder : MonoBehaviour
 {
     public static string PLAYER_TAG = "Player";
+    public static string PIE_TAG = "Pie";
 }

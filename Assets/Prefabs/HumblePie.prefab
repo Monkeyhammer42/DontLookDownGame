@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4357885971237051084}
   m_Layer: 0
   m_Name: HumblePie
-  m_TagString: Untagged
+  m_TagString: Pie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,7 +94,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -122,10 +122,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fc978004d0fa7b49b26e6340c6d9fe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bottom_Collision: {fileID: 4357885971877595321}
-  PlayerLayer:
-    serializedVersion: 2
-    m_Bits: 512
 --- !u!95 &4357885971237051084
 Animator:
   serializedVersion: 3
@@ -169,7 +165,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4357885971877595320}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.414, z: 0}
+  m_LocalPosition: {x: -0.06, y: -0.52, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4357885971237051083}

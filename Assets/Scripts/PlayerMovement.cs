@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
     {
         CheckIfGrounded();
         PlayerJump();
+        PlayerSprint();
 
 
     }
@@ -87,21 +88,25 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-    void OnTriggerEnter2D(Collider2D target)
+   
+    void PlayerSprint()
     {
-        if (target.tag == "Pie")
+        if (isGrounded)
         {
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                speed = 10f;
+            }
+            else if (Input.GetKeyUp(KeyCode.LeftShift))
             
-            
-                target.gameObject.SetActive(false);
-            
+            {
+                speed = 5f;
+            }
         }
     }
 
 
-
-
-
+  
 
 
 
