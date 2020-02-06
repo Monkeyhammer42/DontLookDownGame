@@ -30,14 +30,15 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         CheckIfGrounded();
-        PlayerJump();
-        PlayerSprint();
-
+        
 
     }
     void FixedUpdate()
     {
         PlayerWalk();
+        PlayerJump();
+        PlayerSprint();
+        PlayerSneak();
     }
     void PlayerWalk()
     {
@@ -105,8 +106,25 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void PlayerSneak()
+    {
+        if (isGrounded)
+        {
+            if (Input.GetKeyDown(KeyCode.CapsLock))
+            {
+                speed = 2.5F;
+                anim.SetBool("IsSneaking", true);
+            }
+            else if (Input.GetKeyUp(KeyCode.CapsLock))
 
-  
+            {
+                speed = 5F;
+                anim.SetBool("IsSneaking", false);
+            }
+        }
+    }
+
+
 
 
 

@@ -13,6 +13,7 @@ public class PlayerDamage : MonoBehaviour
     private bool canDamage;
     public bool IsDead;
     private Animator anim;
+    private SpriteRenderer hit;
     void Awake()
     {
         lifeText = GameObject.Find("LifeText").GetComponent<Text>();
@@ -21,18 +22,24 @@ public class PlayerDamage : MonoBehaviour
         
         canDamage = true;
         IsDead=false;
+
     }
     void Start()
     {
         anim = GetComponent<Animator>();
+        hit = GetComponentInChildren<SpriteRenderer>();
     }
     public void DealDamage()
     {
         if (canDamage)
         {
             lifeScoreCount--;
+            print("hit");
+            
+
             if (lifeScoreCount >= 0)
             {
+                hit.gameObject.SetActive(true);
                 lifeText.text = "x " + lifeScoreCount;
                 
             }
@@ -44,6 +51,7 @@ public class PlayerDamage : MonoBehaviour
 
             }
             canDamage = false;
+            
 
             StartCoroutine(WaitForDamage());
         }

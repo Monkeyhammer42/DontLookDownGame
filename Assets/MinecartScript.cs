@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MinecartScript : MonoBehaviour
 {
-    private AudioSource audio;
+    private AudioSource crash;
     private ParticleSystem sparks;
     private Rigidbody2D myBody;
     private Animator anim;
@@ -22,7 +22,7 @@ public class MinecartScript : MonoBehaviour
     {
         myBody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        audio = GetComponent<AudioSource>();
+        crash = GetComponent<AudioSource>();
         sparks = GetComponent<ParticleSystem>();
     }
     void Start()
@@ -89,7 +89,7 @@ public class MinecartScript : MonoBehaviour
         {
             print("hello");
              target.gameObject.GetComponent<PlayerDamage>().DealDamage();
-            audio.Play();
+            crash.Play();
             sparks.Stop();
             myBody.bodyType = RigidbodyType2D.Dynamic;
             canMove = false;
