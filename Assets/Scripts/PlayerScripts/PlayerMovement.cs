@@ -12,8 +12,11 @@ public class PlayerMovement : MonoBehaviour
 
     public Transform groundCheckPosition;
     public LayerMask groundLayer;
-
+    
+    public LayerMask LeftSlopeLayer;
+    public LayerMask RightSlopeLayer;
     private bool isGrounded;
+    private bool isSlope;
     private bool jumped;
     private float jumpPower = 8f;
      void Awake()
@@ -30,7 +33,9 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         CheckIfGrounded();
-        
+        CheckIfSlope();
+
+
 
     }
     void FixedUpdate()
@@ -124,7 +129,26 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void CheckIfSlope()
+    {
+        isSlope = Physics2D.Raycast(groundCheckPosition.position, Vector2.down, 0.1f, LeftSlopeLayer);
+        if (isSlope)
+        {
+            
 
+                anim.SetBool("Slide", true);
+            
+        }
+        isSlope = Physics2D.Raycast(groundCheckPosition.position, Vector2.down, 0.1f, RightSlopeLayer);
+        if (isSlope)
+        {
+
+
+            anim.SetBool("Slide", true);
+
+        }
+
+    }
 
 
 

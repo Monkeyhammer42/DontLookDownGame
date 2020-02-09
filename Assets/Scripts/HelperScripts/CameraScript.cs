@@ -13,6 +13,7 @@ public class CameraScript : MonoBehaviour
     private Vector3 lastTargetPosition;
     private Vector3 currentVelocity;
     private bool followsPlayer;
+    public float bottomcamera=3f;
      void Awake()
     {
         BoxCollider2D myCol = GetComponent<BoxCollider2D>();
@@ -36,13 +37,21 @@ public class CameraScript : MonoBehaviour
         if (followsPlayer)
         {
             Vector3 aheadTargetPos = target.position + Vector3.forward * offsetZ;
+         //   Vector3 aboveTargetPos = target.position + Vector3.up * offsetZ;
             if (aheadTargetPos.x >= transform.position.x)
             {
                 Vector3 newCameraPosition = Vector3.SmoothDamp(transform.position, aheadTargetPos, ref currentVelocity, cameraSpeed);
 
-                transform.position = new Vector3(newCameraPosition.x, transform.position.y, newCameraPosition.z);
+                transform.position = new Vector3(newCameraPosition.x, newCameraPosition.y+bottomcamera, newCameraPosition.z);
                 lastTargetPosition = target.position;
             }
+            //if (aboveTargetPos.y >= transform.position.y)
+            //{
+            //    Vector3 newCameraPosition = Vector3.SmoothDamp(transform.position, aheadTargetPos, ref currentVelocity, cameraSpeed);
+
+            //    transform.position = new Vector3(transform.position.x, newCameraPosition.y, transform.position.z);
+            //    lastTargetPosition = target.position;
+            //}
         }
     }
 
