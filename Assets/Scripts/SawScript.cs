@@ -49,9 +49,7 @@ public class SawScript : MonoBehaviour
             SawSounds.Play();
             DeleteSaw();
 
-
-
-
+                       
         }
     }
 }

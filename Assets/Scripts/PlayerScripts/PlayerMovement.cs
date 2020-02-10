@@ -16,7 +16,8 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask LeftSlopeLayer;
     public LayerMask RightSlopeLayer;
     private bool isGrounded;
-    private bool isSlope;
+    private bool isSloperight;
+    private bool isSlopeleft;
     private bool jumped;
     private float jumpPower = 8f;
      void Awake()
@@ -68,6 +69,11 @@ public class PlayerMovement : MonoBehaviour
         tempScale.x = direction;
         transform.localScale = tempScale;
     }
+    void DropDown(float height)
+    {
+        myBody.position = myBody.position + new Vector2(0f, height);
+        
+    }
     void CheckIfGrounded()
     {
         isGrounded = Physics2D.Raycast(groundCheckPosition.position, Vector2.down, 0.1f, groundLayer);
@@ -92,6 +98,8 @@ public class PlayerMovement : MonoBehaviour
                 myBody.velocity = new Vector2(myBody.velocity.x, jumpPower);
                 anim.SetBool("Jump", true);
             }
+        }else if(isSloperight){
+            anim.SetBool("Jump", false);
         }
     }
    
@@ -128,23 +136,48 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
+    void Slideright()
+    {
+        
+        myBody.velocity = new Vector2(0.5f,myBody.velocity.y );
+    }
+    void LiftUp(float Raised)
+    {
+        myBody.position = myBody.position + new Vector2(0f, Raised);
+        
+    }
 
     void CheckIfSlope()
     {
-        isSlope = Physics2D.Raycast(groundCheckPosition.position, Vector2.down, 0.1f, LeftSlopeLayer);
-        if (isSlope)
+        isSloperight = Physics2D.Raycast(groundCheckPosition.position, Vector2.down, 0.5f, RightSlopeLayer);
+        isSlopeleft = Physics2D.Raycast(groundCheckPosition.position, Vector2.down, 0.5f, LeftSlopeLayer);
+        if (isSlopeleft&&!isSloperight)
         {
-            
-
-                anim.SetBool("Slide", true);
+              anim.SetBool("Slide", true);
+            ChangeDirection(-1);
+            DropDown(-.1f);
             
         }
-        isSlope = Physics2D.Raycast(groundCheckPosition.position, Vector2.down, 0.1f, RightSlopeLayer);
-        if (isSlope)
+        else if (!isSlopeleft &&!isSloperight)
+        {
+            anim.SetBool("Slide", false);
+           
+        }
+       
+        if (isSloperight&&!isSlopeleft)
         {
 
 
             anim.SetBool("Slide", true);
+            Slideright();
+
+
+
+        }
+        else if (!isSloperight&&!isSlopeleft)
+        {
+            anim.SetBool("Slide", false);
+            
 
         }
 

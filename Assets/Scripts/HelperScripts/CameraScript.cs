@@ -14,7 +14,8 @@ public class CameraScript : MonoBehaviour
     private Vector3 currentVelocity;
     private bool followsPlayer;
     public float bottomcamera=3f;
-     void Awake()
+    public float leftcamera = 3f;
+    void Awake()
     {
         BoxCollider2D myCol = GetComponent<BoxCollider2D>();
         myCol.size = new Vector2(Camera.main.aspect * 2f * Camera.main.orthographicSize, 15f);
@@ -38,13 +39,12 @@ public class CameraScript : MonoBehaviour
         {
             Vector3 aheadTargetPos = target.position + Vector3.forward * offsetZ;
          //   Vector3 aboveTargetPos = target.position + Vector3.up * offsetZ;
-            if (aheadTargetPos.x >= transform.position.x)
-            {
-                Vector3 newCameraPosition = Vector3.SmoothDamp(transform.position, aheadTargetPos, ref currentVelocity, cameraSpeed);
+           
+                Vector3 newCameraPosition = Vector3.SmoothDamp(transform.position, aheadTargetPos, ref currentVelocity, resetSpeed);
 
-                transform.position = new Vector3(newCameraPosition.x, newCameraPosition.y+bottomcamera, newCameraPosition.z);
+                transform.position = new Vector3(newCameraPosition.x+leftcamera, newCameraPosition.y+bottomcamera, newCameraPosition.z);
                 lastTargetPosition = target.position;
-            }
+            
             //if (aboveTargetPos.y >= transform.position.y)
             //{
             //    Vector3 newCameraPosition = Vector3.SmoothDamp(transform.position, aheadTargetPos, ref currentVelocity, cameraSpeed);
