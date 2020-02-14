@@ -20,7 +20,9 @@ public class PlayerMovement : MonoBehaviour
     private bool isSlopeleft;
     private bool jumped;
     private float jumpPower = 8f;
-     void Awake()
+    public static int movespeed = 5;
+    public Vector3 userDirection = Vector3.right;
+    void Awake()
     {
         myBody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -109,13 +111,19 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.LeftShift))
             {
-                speed = 10f;
+                speed = 7.5f;
             }
             else if (Input.GetKeyUp(KeyCode.LeftShift))
-            
+
             {
                 speed = 5f;
             }
+
+        }
+        else if (!Input.GetKey(KeyCode.LeftShift))
+
+        {
+            speed = 5f;
         }
     }
 
@@ -138,8 +146,9 @@ public class PlayerMovement : MonoBehaviour
     }
     void Slideright()
     {
-        
-        myBody.velocity = new Vector2(0.5f,myBody.velocity.y );
+
+        transform.Translate(userDirection * movespeed * Time.deltaTime);
+
     }
     void LiftUp(float Raised)
     {
@@ -170,7 +179,7 @@ public class PlayerMovement : MonoBehaviour
 
             anim.SetBool("Slide", true);
             Slideright();
-
+            ChangeDirection(1);
 
 
         }
