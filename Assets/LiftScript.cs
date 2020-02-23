@@ -6,7 +6,7 @@ public class LiftScript : MonoBehaviour
 {
    
     private bool isLift=true;
-    public int speed=3;
+    public int speed=10;
     private Vector2 moveDirection;
     private Rigidbody2D mybody;
     public Vector2 origin;

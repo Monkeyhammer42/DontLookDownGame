@@ -8,23 +8,34 @@ public class UiController : MonoBehaviour
 {
     public Canvas UiCanvas;
    
-    public Button MainMenuButton,ControlsButton;
-    public GameObject MainMenuPanel, AreyousurePanel,ControlsPanel,StoryPanelOne;
+    public Button MainMenuButton,ControlsButton, ResetButton;
+    public GameObject MainMenuPanel, AreyousurePanel,ControlsPanel,StoryPanelOne, ResetPanel;
 
+    public GameObject player;
+    private Transform playerTransform;
+    public Transform originReset;
+    public bool playerReset;
 
     void Start()
     {
-        
+       
         MainMenuButton.gameObject.SetActive(true);
         ControlsButton.gameObject.SetActive(true);
+        ResetButton.gameObject.SetActive(false);
         StoryPanelOne.SetActive(true);
         MainMenuPanel.SetActive(false);
-        Time.timeScale = 1f;
+        ResetPanel.gameObject.SetActive(false);
+
+        player = GetComponent<GameObject>();
+        playerTransform = GetComponent<Transform>();
     }
 
     void Update()
     {
-        
+        if (playerReset)
+        {
+            playerTransform.position = originReset.position;
+        } 
     }
     public void PauseGame()
     {
@@ -33,6 +44,7 @@ public class UiController : MonoBehaviour
     }
     public void UnPauseGame()
     {
+        ResetPanel.gameObject.SetActive(false);
         AreyousurePanel.SetActive(false);
         ControlsPanel.SetActive(false);
         StoryPanelOne.SetActive(false);
@@ -40,8 +52,10 @@ public class UiController : MonoBehaviour
     }
     public void QuitGame()
     {
+        ResetPanel.gameObject.SetActive(false);
         AreyousurePanel.SetActive(false);
         MainMenuButton.gameObject.SetActive(false);
+        ResetButton.gameObject.SetActive(false);
         ControlsButton.gameObject.SetActive(false);
         MainMenuPanel.SetActive(true);
        
@@ -56,5 +70,15 @@ public class UiController : MonoBehaviour
     {
         SceneManager.LoadScene("SampleScene");
         
+    }
+    public void ResetPlayer()
+    {
+
+        ResetPanel.SetActive(true);
+       
+    }
+    public void PlayerReset()
+    {
+        playerReset = true;
     }
 }
